@@ -3,9 +3,34 @@ function requestUser($access_token)
 {
     $url = "https://subscribestar.adult/api/graphql/v1";
 
-    // $body = array(
-    //     'query' => '{ user {email} }',
-    // );
+    $body = array(
+        'query' => '{ user { email, name } }',
+    );
+
+    $user_info_request = wp_remote_post($url, [
+        'headers' => [
+            'Authorization' => 'Bearer ' . $access_token,
+            'Content-Type' => 'application/json'
+        ],
+        'body' => wp_json_encode($body),
+        'method' => 'POST',
+        'data_format' => 'body'
+    ]);
+
+    if (!is_wp_error($user_info_request) && wp_remote_retrieve_response_code($user_info_request) === 200) {
+        $user_info = json_decode((string) wp_remote_retrieve_body($user_info_request), true);
+
+        echo '<script>console.log("Requested subscriber: ",' . json_encode($user_info) . ')</script>';
+
+        return $user_info;
+    } else {
+        echo '<>console.log("Could not get SubscriberStar user")</script>';
+    }
+}
+
+function requestSubscriber($access_token)
+{
+    $url = "https://subscribestar.adult/api/graphql/v1";
 
     $body = array(
         'query' => '{ 
@@ -38,7 +63,7 @@ function requestUser($access_token)
     if (!is_wp_error($user_info_request) && wp_remote_retrieve_response_code($user_info_request) === 200) {
         $user_info = json_decode((string) wp_remote_retrieve_body($user_info_request), true);
 
-        echo '<script>console.log("Requested subscriber: ",' . json_encode($user_info) . ')</script>';
+        // echo '<script>console.log("Requested subscriber: ",' . json_encode($user_info) . ')</script>';
 
         return $user_info;
     } else {
@@ -49,15 +74,13 @@ function requestUser($access_token)
 function requestUserTier($access_token)
 {
     $user_tier = 0;
-
     // Get the subscription data (replace this with your actual logic)
-    $subscription = requestUser($access_token);
-    if (!isset($subscription['subscriber']) || !isset($subscription['subscriber']['subscription'])) {
-        _log("User has no subscription");
-        return null;
+    $subscription = requestSubscriber($access_token);
+    if (!isset($subscription['data']['subscriber']) || !isset($subscription['data']['subscriber']['subscription'])) {
+        _log("User has no subscription (free user)");
+        return $user_tier = 0;
     }
-    $subscription = $subscription['subscriber']['subscription'];
-    _log($subscription);
+    $subscription = $subscription['data']['subscriber']['subscription'];
 
     // Check if the subscription is active
     if ($subscription['active']) {
@@ -65,25 +88,28 @@ function requestUserTier($access_token)
 
         // Assign user's tier based on the price using a switch statement
         switch ($price) {
-            case ($price = 500):
+            case ($price = get_option('substar_manager_tier_1')):
                 $user_tier = 1;
                 break;
-            case ($price = 1000):
+            case ($price = get_option('substar_manager_tier_2')):
                 $user_tier = 2;
                 break;
-            case ($price = 2000):
+            case ($price = get_option('substar_manager_tier_3')):
                 $user_tier = 3;
                 break;
-            case ($price = 2500):
+            case ($price = get_option('substar_manager_tier_4')):
                 $user_tier = 4;
                 break;
-            case ($price = 4000):
+            case ($price = get_option('substar_manager_tier_5')):
                 $user_tier = 5;
                 break;
-            case ($price = 5000):
+            case ($price = get_option('substar_manager_tier_6')):
                 $user_tier = 6;
                 break;
-            case ($price = 10000):
+            case ($price = get_option('substar_manager_tier_7')):
+                $user_tier = 7;
+                break;
+            case ($price = get_option('substar_manager_tier_8')):
                 $user_tier = 7;
                 break;
             default:
@@ -93,5 +119,4 @@ function requestUserTier($access_token)
 
     return $user_tier;
 }
-
 ?>

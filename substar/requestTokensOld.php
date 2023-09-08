@@ -1,15 +1,22 @@
 <?php
+// request config for constant variables
+$config = include(__DIR__ . '/../config.php');
+
 // Handle the OAuth2 callback
 function requestTokens($code)
 {
-  _log("Getting TOKENS");
+  // _log("Getting TOKENS");
+  global $config;
 
   // if ($code && isset($_GET['state']) && $_GET['state'] === 'subscribestar') {
   $token_request_data = [
     'code' => $code,
-    'client_id' => get_option('substar_manager_client_id'),
-    'client_secret' => get_option('substar_manager_secret'),
-    'redirect_uri' =>  get_option('substar_manager_redirect_uri'),
+    // 'client_id' => SUBSCRIBESTAR_CLIENT_ID,
+    // 'client_secret' => SUBSCRIBESTAR_CLIENT_SECRET,
+    // 'redirect_uri' => SUBSCRIBESTAR_REDIRECT_URI,
+    'client_id' => $config['SUBSCRIBESTAR_CLIENT_ID'],
+    'client_secret' => $config['SUBSCRIBESTAR_SECRET'],
+    'redirect_uri' =>  $config['SUBSCRIBESTAR_REDIRECT_URI'],
     'grant_type' => 'authorization_code',
   ];
 

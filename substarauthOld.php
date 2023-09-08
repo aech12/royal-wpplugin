@@ -1,47 +1,48 @@
 <?php
+// THIS FILE WORKS W OLD SYSTEM AND IS ONLY ARCHIVED FOR REFERENCE
+
 // AUTHENTICATE WITH SUBSCRIBERSTAR API
-require_once 'general/log.php';
+
+// request config for constant variables
+// include('substar/config.php');
+
+function _log($output)
+{
+  echo '<script>console.log("_ ", ' . json_encode($output) . ')</script>';
+}
 
 // STEP 1
 // Add a shortcode [subscribestar_oauth2_login] to display the SubscribeStar OAuth2 login link
-require_once 'oauth/addShortcode.php';
+require_once 'substar/addShortcode.php';
 
 // STEP 2
 // After user clicks Login and accepts permissions, he's redirected back to the url set in Subscriberstar settings and is given a shortlived code
 $current_url = $_SERVER['REQUEST_URI'];
 
 require_once 'substar/requestTokens.php';
+require_once 'substar/tokens.php';
 require_once 'substar/user.php';
-require_once 'oauth/user.php';
 
-// add_action('init', 'tryagia');
-// function tryagia()
-// {
-//   $cr = wp_create_user("user1", "pass1234", "aech-13@hotmail.com");
-//   _log($cr);
-// }
-// tryagia();
-
-if (strpos($current_url, '/royal/') === 0 && isset($_GET['code'])) {
+// if (strpos($current_url, '/login/subscriberstar/') === 0) {
+if (strpos($current_url, '/royal/') === 0) {
   // save access token and refresh token to cookies
-  $authorization_code = $_GET['code'];
-  _log("Code in url:");
-  _log($authorization_code);
+  if (isset($_GET['code'])) {
+    $authorization_code = $_GET['code'];
+    _log("Code in url:");
+    _log($authorization_code);
 
-  try {
     $tokens = requestTokens($authorization_code);
-    // _log($tokens);
 
     if ($tokens) {
-      $substar_user = requestUser($tokens['access_token']);
-      $user = saveUserToWp($substar_user['data']['user'], $tokens);
-      // _log($user);
+      save_tokens_to_cookies($tokens);
+      echo '<p>Succesfully logged in!</p>';
     } else {
+      echo '<p>Failed to request tokens. Try signing in again.</p>';
       _log("Failed to request tokens.");
     }
-  } catch (Exception $e) {
-    echo '<p>Failed to request tokens. Try signing in again.</p>';
-    echo '<p>Error: ' . $e->getMessage() . '</p>';
+  } else {
+    // echo '<p>Could not detect code in url.</p>';
+    _log("Could not detect code in url. Tokens won't be requested.");
   }
 }
 

@@ -1,16 +1,18 @@
 <?php
-// Store your ENV variables in .env file - (couldn't make .env work in wordpress)
-define('SUBSCRIBESTAR_CLIENT_ID', 'rQrGZN1CFd_26K8L-8lzDHf9_emPQ7h2bnBHq32ABLg');
-define('SUBSCRIBESTAR_SECRET', 'RoPWLOf7EfItn9BXc2b0ZryL3-RoYqCji-sqjNrBotU');
-define('SUBSCRIBESTAR_REDIRECT_URI', 'http://localhost/royal');
-define('SUBSCRIBESTAR_REQUEST_SCOPE', "subscriber.read+subscriber.payments.read+user.read+user.email.read");
-define('SUBSCRIBESTAR_API_ENDPOINT', "https://www.subscribestar.com/api/graphql/v1");
+$subscribestar_api_endpoint = "https://www.subscribestar.com/api/graphql/v1";
+$substar_manager_request_scope = "subscriber.read+user.read+user.email.read";
+
+define('SUBSCRIBESTAR_API_ENDPOINT', $subscribestar_api_endpoint);
+define('SUBSCRIBESTAR_REQUEST_SCOPE', $substar_manager_request_scope);
+
+// Set variables from above form
+$subscribestar_client_id = get_option('substar_manager_client_id');
+$subscribestar_secret = get_option('substar_manager_secret');
+$subscribestar_redirect_uri = get_option('substar_manager_redirect_uri');
+// $subscribestar_request_scope = get_option('substar_manager_request_scope');
 
 return [
-  'SUBSCRIBESTAR_CLIENT_ID' => 'rQrGZN1CFd_26K8L-8lzDHf9_emPQ7h2bnBHq32ABLg',
-  'SUBSCRIBESTAR_SECRET' => 'RoPWLOf7EfItn9BXc2b0ZryL3-RoYqCji-sqjNrBotU',
-  'SUBSCRIBESTAR_REDIRECT_URI' => 'http://localhost/royal',
-  'SUBSCRIBESTAR_REQUEST_SCOPE' => "subscriber.read+subscriber.payments.read+user.read+user.email.read",
-  'SUBSCRIBESTAR_API_ENDPOINT' => "https://www.subscribestar.com/api/graphql/v1"
+  'SUBSCRIBESTAR_API_ENDPOINT' => $subscribestar_api_endpoint,
+  'SUBSCRIBESTAR_REQUEST_SCOPE' => $substar_manager_request_scope
 ];
 ?>

@@ -1,5 +1,6 @@
 <?php
-require_once 'general/log.php';
+// THIS FILE WORKS WITH THE OLD SYSTEM
+// NEW SYSTEM USES NATIVE WORDPRESS USERS FEATURE
 
 // Add a custom user meta field for the user's tier
 function tiered_content_user_meta($user)
@@ -22,26 +23,29 @@ function tiered_content_user_meta($user)
 add_action('show_user_profile', 'tiered_content_user_meta');
 add_action('edit_user_profile', 'tiered_content_user_meta');
 
+// Get the user's tier
+// function get_user_tier() {
+//     // Get the user's tier from the user meta
+//     $user_id = get_current_user_id();
+//     $user_tier = (int) get_user_meta($user_id, 'tier', true); // Convert the user's tier to an integer
+//     return $user_tier;
+// }
 require_once 'substar/tokens.php';
 require_once 'substar/user.php';
 
 // Render the block if the user has the correct tier
 function render_my_container_block($attributes, $content)
 {
-    if (!is_user_logged_in()) {
-        return '<p>You\'re not logged in, or your session expired. Please login (on Royalty tab).</p>';
+    $user_access_token = get_access_token_cookie();
+    if (!$user_access_token) {
+        return '<p>You\'re not logged in, or your session expired. Please login.</p>';
     }
 
-    // Get user's tier
-    $user_id = get_current_user_id();
-    $access_token = get_user_meta($user_id, 'access_token', true); // Retrieve the value of the 'access_token' meta field
-
-    if (!$access_token) {
-        return '<p>No access token, your session must be expired. Please login again (on Royalty tab).</p>';
+    $user_tier = requestUserTier($user_access_token); 
+    $user_tier = 3;
+    if (!$user_tier) {
+        return '<p>You\'re not subscribed on SubscriberStar.</p>';
     }
-
-    $user_tier = requestUserTier($access_token);
-    _log($user_tier);
 
     // Convert the tier attribute to an integer
     $tier_of_the_content = intval($attributes['tier']);

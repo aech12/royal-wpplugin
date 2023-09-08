@@ -14,14 +14,15 @@ const editBlock = ({ attributes, setAttributes }) => {
                         label="Tier"
                         value={tier}
                         options={[
-                            { label: '1 Duke/Duchess', value: 1 },
-                            { label: '2 King/Queen', value: 2 },
-                            { label: '3 Emperor/Empress', value: 3 },
-                            { label: '4 Royal+', value: 4 },
+                            { label: '0 Free', value: 0 },
+                            { label: '1 Baron', value: 1 },
+                            { label: '2', value: 2 },
+                            { label: '3', value: 3 },
+                            { label: '4', value: 4 },
                             { label: '5 Royal+', value: 5 },
                             { label: '6 Royal+', value: 6 },
-                            { label: '7 Royal+', value: 7 }
-                            // Add more tiers as needed
+                            { label: '7 Royal+', value: 7 },
+                            { label: '8 Royal+', value: 8 }
                         ]}
                         onChange={(value) => setAttributes({ tier: value })}
                     />
