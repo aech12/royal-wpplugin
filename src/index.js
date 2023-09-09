@@ -1,57 +1,42 @@
+/**
+ * Registers a new block provided a unique name and an object defining its behavior.
+ *
+ * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
+ */
 import { registerBlockType } from '@wordpress/blocks';
-import { InnerBlocks, InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import { PanelBody, SelectControl } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 
-const editBlock = ({ attributes, setAttributes }) => {
-    const { tier } = attributes;
+/**
+ * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
+ * All files containing `style` keyword are bundled together. The code used
+ * gets applied both to the front of your site and to the editor.
+ *
+ * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
+ */
+import './style.scss';
 
-    return (
-        <Fragment>
-            <InspectorControls>
-                <PanelBody title="Tier Settings">
-                    <SelectControl
-                        label="Tier"
-                        value={tier}
-                        options={[
-                            { label: '0 Free', value: 0 },
-                            { label: '1 Baron', value: 1 },
-                            { label: '2', value: 2 },
-                            { label: '3', value: 3 },
-                            { label: '4', value: 4 },
-                            { label: '5 Royal+', value: 5 },
-                            { label: '6 Royal+', value: 6 },
-                            { label: '7 Royal+', value: 7 },
-                            { label: '8 Royal+', value: 8 }
-                        ]}
-                        onChange={(value) => setAttributes({ tier: value })}
-                    />
-                </PanelBody>
-            </InspectorControls>
-            <div {...useBlockProps()}>
-                <InnerBlocks />
-            </div>
-        </Fragment>
-    );
-};
+/**
+ * Internal dependencies
+ */
+import Edit from './edit';
+// import Save from './save';
+import metadata from './block.json';
 
-registerBlockType('my-namespace/my-container-block', {
-    title: 'Subscriberstar Block',
-    icon: 'text',
-    category: 'layout',
-    attributes: {
-        tier: {
-            type: 'number',
-            default: 1,
-        },
-    },
-    render_callback: render_my_container_block,
-    edit: editBlock,
-    save() {
-        return (
-            <div className="my-container-block">
-                <InnerBlocks.Content />
-            </div>
-        );
-    },
+/**
+ * Every block starts by registering a new block type definition.
+ *
+ * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
+ */
+registerBlockType(metadata.name, {
+	/**
+	 * @see ./edit.js
+	 */
+	edit: Edit,
+	save: () => null, // Save,
+	// render_callback: render_substar_dynamic_block,
+	attributes: metadata.attributes,
+	// render: metadata.render
 });
+
+// render_callback: ( blockAttributes, innerContent ) => {
+// 	return '';
+// },

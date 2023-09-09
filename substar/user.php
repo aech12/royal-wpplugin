@@ -76,6 +76,7 @@ function requestUserTier($access_token)
     $user_tier = 0;
     // Get the subscription data (replace this with your actual logic)
     $subscription = requestSubscriber($access_token);
+    _log($subscription['data']['subscriber']['subscription']);
     if (!isset($subscription['data']['subscriber']) || !isset($subscription['data']['subscriber']['subscription'])) {
         _log("User has no subscription (free user)");
         return $user_tier = 0;
@@ -86,30 +87,32 @@ function requestUserTier($access_token)
     if ($subscription['active']) {
         $price = $subscription['price'];
 
+        _log($subscription['price']);
+
         // Assign user's tier based on the price using a switch statement
         switch ($price) {
-            case ($price = get_option('substar_manager_tier_1')):
+            case ($price === get_option('substar_manager_tier_1')):
                 $user_tier = 1;
                 break;
-            case ($price = get_option('substar_manager_tier_2')):
+            case ($price === get_option('substar_manager_tier_2')):
                 $user_tier = 2;
                 break;
-            case ($price = get_option('substar_manager_tier_3')):
+            case ($price === get_option('substar_manager_tier_3')):
                 $user_tier = 3;
                 break;
-            case ($price = get_option('substar_manager_tier_4')):
+            case ($price === get_option('substar_manager_tier_4')):
                 $user_tier = 4;
                 break;
-            case ($price = get_option('substar_manager_tier_5')):
+            case ($price === get_option('substar_manager_tier_5')):
                 $user_tier = 5;
                 break;
-            case ($price = get_option('substar_manager_tier_6')):
+            case ($price === get_option('substar_manager_tier_6')):
                 $user_tier = 6;
                 break;
-            case ($price = get_option('substar_manager_tier_7')):
+            case ($price === get_option('substar_manager_tier_7')):
                 $user_tier = 7;
                 break;
-            case ($price = get_option('substar_manager_tier_8')):
+            case ($price === get_option('substar_manager_tier_8')):
                 $user_tier = 7;
                 break;
             default:

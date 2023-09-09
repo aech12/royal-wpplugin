@@ -14,15 +14,19 @@ $roles = array(
 
 // Add roles
 foreach ($roles as $index => $role) {
-  add_role(
-    $index,
-    __($role),
-    array(
-      'read' => true,
-      'edit_posts' => false,
-      'delete_posts' => false,
-    )
-  );
+  $existing_role = get_role($index);
+  
+  if (empty($existing_role)) {
+    add_role(
+      $index,
+      __($role),
+      array(
+        'read' => true,
+        'edit_posts' => false,
+        'delete_posts' => false,
+      )
+    );
+  }
 }
 
 // Add a capability to a role
