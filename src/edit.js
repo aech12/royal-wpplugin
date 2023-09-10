@@ -11,7 +11,11 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import {
+	InnerBlocks,
+	InspectorControls,
+	useBlockProps
+} from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -29,10 +33,44 @@ import './editor.scss';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
+
+import { PanelBody, SelectControl } from '@wordpress/components';
+import { Fragment } from '@wordpress/element';
+
+export default function Edit({ attributes, setAttributes }) {
+	const blockProps = useBlockProps();
+	// 	const innerBlocksProps = useInnerBlocksProps()
+	const { tier } = attributes;
+
 	return (
-		<p { ...useBlockProps() }>
-			{ __( 'Gutenpride – hello from the editor!', 'gutenpride' ) }
-		</p>
+		<Fragment>
+			{/* <p>Pick Content&apos;s Tier (this text won&apos;t show)</p> */}
+			<InspectorControls>
+				<PanelBody title="Tier Settings">
+					<SelectControl
+						label="Tier"
+						value={tier}
+						options={[
+							{ label: '0 Free', value: 0 },
+							{ label: '1 Baron', value: 1 },
+							{ label: '2', value: 2 },
+							{ label: '3', value: 3 },
+							{ label: '4', value: 4 },
+							{ label: '5 Royal+', value: 5 },
+							{ label: '6 Royal+', value: 6 },
+							{ label: '7 Royal+', value: 7 },
+							{ label: '8 Royal+', value: 8 },
+						]}
+						onChange={(value) =>
+							setAttributes({ tier: value })
+						}
+					/>
+				</PanelBody>
+			</InspectorControls>
+			<div {...blockProps}>
+				{/* <div {...innerBlocksProps} /> */}
+				<InnerBlocks />
+			</div>
+		</Fragment>
 	);
 }

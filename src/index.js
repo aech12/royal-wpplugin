@@ -1,94 +1,23 @@
 /**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
+ * Registers a new block provided a unique name and an object defining its behavior.
  *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
+ * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-import { useBlockProps } from '@wordpress/block-editor';
 import { registerBlockType } from '@wordpress/blocks';
-import { __ } from '@wordpress/i18n';
-import { Fragment } from '@wordpress/element';
-import { PanelBody, SelectControl } from '@wordpress/components';
+import './style.scss';
 
-/**
- * The edit and save functions define the way in which the different attributes should
- * be combined into the final markup, which is then serialized by the block
- * editor into `post_content`.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/
- *
- * @return {WPElement} Element to render.
- */
-const blockContent = ({ attributes, setAttributes }) => {
-	const { imageUrl, imageAlt, imageSize, imageValue } = attributes;
+import Edit from './edit';
+import Save from './save';
+import metadata from './block.json';
 
-	const sizes = [
-		{ label: __('Thumbnail'), value: 'thumbnail' },
-		{ label: __('Medium'), value: 'medium' },
-		{ label: __('Large'), value: 'large' },
-		{ label: __('Full Size'), value: 'full' },
-	];
-
-	return (
-		<Fragment>
-			<img
-				src={imageUrl}
-				alt={imageAlt}
-				{...useBlockProps()}
-			/>
-			<PanelBody title={__('Image Settings')}>
-				<SelectControl
-					label={__('Image Size')}
-					value={imageSize}
-					options={sizes}
-					onChange={(value) => setAttributes({ imageSize: value })}
-				/>
-				<SelectControl
-					label={__('Image Value')}
-					value={imageValue}
-					options={[
-						{ label: '1', value: 1 },
-						{ label: '2', value: 2 },
-						{ label: '3', value: 3 },
-						{ label: '4', value: 4 },
-					]}
-					onChange={(value) => setAttributes({ imageValue: parseInt(value) })}
-				/>
-			</PanelBody>
-		</Fragment>
-	);
-};
-
-registerBlockType('my-plugin/image-block', {
-	title: __('My Image Block'),
-	icon: 'format-image',
-	category: 'common',
-	supports: {
-		align: true,
-		html: false,
-	},
-	attributes: {
-		imageUrl: {
-			type: 'string',
-			source: 'attribute',
-			selector: 'img',
-			attribute: 'src',
-		},
-		imageAlt: {
-			type: 'string',
-			source: 'attribute',
-			selector: 'img',
-			attribute: 'alt',
-		},
-		imageSize: {
-			type: 'string',
-			default: 'medium',
-		},
-		imageValue: {
-			type: 'number',
-			default: 1,
-		},
-	},
-	edit: blockContent,
-	save: blockContent,
+registerBlockType(metadata.name, {
+	/**
+	 * @see ./edit.js
+	 */
+	// render_callback: render_substar_block,
+	render: metadata.render,
+	edit: Edit,
+	save: Save,
+	attributes: metadata.attributes,
 });
+
