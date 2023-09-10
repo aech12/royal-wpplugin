@@ -2,7 +2,7 @@
 // require_once 'general/log.php';
 require_once 'substar/user.php';
 
-function check_auth($attributes, $content)
+function check_auth($attributes)
 {
     // Check if user is admin
     // If Admin, return highest tier
@@ -34,10 +34,12 @@ function check_auth($attributes, $content)
 // Render the block if the user has the correct tier
 function render_substar_block($attributes, $content)
 {
+    // echo "hiiii";
+    // echo $content;
     $render_content = 0;
-    // $render_content = check_auth($attributes, $content);
+    // $render_content = check_auth($attributes);
     
-    return sprintf('<div class="my-container-block">%s</div>', $content);
+    // return sprintf('<div class="my-container-block">%s</div>', $content);
     return '<div><p>BEG</p>' . $content . '<p>END</p></div>';
     return '<div><p>hardcoded</p>' . $attributes['tier'] . '<p>END</p></div>';
 

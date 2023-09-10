@@ -121,6 +121,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/edit.js");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/block.json");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__);
 
 /**
  * Registers a new block provided a unique name and an object defining its behavior.
@@ -130,46 +132,43 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor.
- *
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 
 
-/**
- * Internal dependencies
- */
-
 // import Save from './save';
 
 
-/**
- * Every block starts by registering a new block type definition.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
   /**
    * @see ./edit.js
    */
-  render_callback: render_substar_block,
-  edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
-  save: () => {
-    const blockProps = useBlockProps.save();
+  // render_callback: render_substar_block,
+  render: _block_json__WEBPACK_IMPORTED_MODULE_4__.render,
+  edit() {
+    const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useBlockProps)();
+    const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useInnerBlocksProps)();
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       ...blockProps
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(InnerBlocks.Content, null));
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      ...innerBlocksProps
+    }));
   },
+  save() {
+    const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useBlockProps.save();
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      ...blockProps
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.InnerBlocks.Content, null));
+  },
+  // edit: Edit,
+  // save: Save,
   // save: () => null, // Save,
-  attributes: _block_json__WEBPACK_IMPORTED_MODULE_4__.attributes,
+  attributes: _block_json__WEBPACK_IMPORTED_MODULE_4__.attributes
   // render_callback: (blockAttributes, innerContent) => {
   // 	console.log("props");
   // 	console.log("props", blockAttributes, innerContent);
   // 	return 'dynamic js';
   // },
-  render: _block_json__WEBPACK_IMPORTED_MODULE_4__.render
 });
 
 /***/ }),
@@ -254,7 +253,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/subscribestar-manager","version":"0.1.0","title":"Subscribestar Tiers Manager","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false},"textdomain":"subscribestar-manager","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","attributes":{"tier":{"type":"number","default":1}},"render":"file:./render.php"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/subscribestar-manager","version":"0.1.0","title":"Subscribestar Tiers Manager","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false},"textdomain":"subscribestar-manager","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","attributes":{"tier":{"type":"number","default":1}}}');
 
 /***/ })
 

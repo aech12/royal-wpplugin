@@ -21,6 +21,5 @@
       "type": "number",
       "default": 1
     }
-  },
-  "render": "file:./render.php"
+  }
 }

@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name:       Subscribestar Manager
- * Description:       Example block scaffolded with Create Block tool.
+ * Plugin Name:       Subscribestar RG Tiers
+ * Description:       Allow user oauth2 login with Subscriberstar.
  * Requires at least: 6.1
  * Requires PHP:      7.0
  * Version:           0.1.0
