@@ -39,6 +39,7 @@ import { Fragment } from '@wordpress/element';
 
 export default function Edit({ attributes, setAttributes }) {
 	const blockProps = useBlockProps();
+	// 	const innerBlocksProps = useInnerBlocksProps()
 	const { tier } = attributes;
 
 	return (
@@ -67,6 +68,7 @@ export default function Edit({ attributes, setAttributes }) {
 				</PanelBody>
 			</InspectorControls>
 			<div {...blockProps}>
+				{/* <div {...innerBlocksProps} /> */}
 				<InnerBlocks />
 			</div>
 		</Fragment>

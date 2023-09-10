@@ -31,9 +31,9 @@ import './editor.scss';
  */
 
 export default function Save() {
-  // const blockProps = useBlockProps.save();
+  const blockProps = useBlockProps.save();
   return (
-    <div { ...useBlockProps.save() }>
+    <div { ...blockProps }>
       <InnerBlocks.Content />
     </div>
   );
