@@ -35,14 +35,15 @@ import './editor.scss';
  */
 
 import { PanelBody, SelectControl } from '@wordpress/components';
+import { Fragment } from '@wordpress/element';
 
 export default function Edit({ attributes, setAttributes }) {
 	const blockProps = useBlockProps();
 	const { tier } = attributes;
 
 	return (
-		<div {...blockProps}>
-			<p>Pick Layout&apos;s Tier (this text won&apos;t show)</p>
+		<Fragment>
+			{/* <p>Pick Content&apos;s Tier (this text won&apos;t show)</p> */}
 			<InspectorControls>
 				<PanelBody title="Tier Settings">
 					<SelectControl
@@ -60,14 +61,14 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: '8 Royal+', value: 8 },
 						]}
 						onChange={(value) =>
-							setAttributes( { tier: value } )
+							setAttributes({ tier: value })
 						}
 					/>
 				</PanelBody>
 			</InspectorControls>
-			<div >
+			<div {...blockProps}>
 				<InnerBlocks />
 			</div>
-		</div>
+		</Fragment>
 	);
 }

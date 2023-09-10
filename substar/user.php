@@ -1,4 +1,5 @@
 <?php
+// Returns user email, or null if not found
 function requestUser($access_token)
 {
     $url = "https://subscribestar.adult/api/graphql/v1";
@@ -25,9 +26,11 @@ function requestUser($access_token)
         return $user_info;
     } else {
         echo '<>console.log("Could not get SubscriberStar user")</script>';
+        return null;
     }
 }
 
+// GET request to get user's subscriber information
 function requestSubscriber($access_token)
 {
     $url = "https://subscribestar.adult/api/graphql/v1";
@@ -68,9 +71,11 @@ function requestSubscriber($access_token)
         return $user_info;
     } else {
         echo '<>console.log("Could not get SubscriberStar user")</script>';
+        return null;
     }
 }
 
+// Returns an int with the user tier
 function requestUserTier($access_token)
 {
     $user_tier = 0;

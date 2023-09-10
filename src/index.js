@@ -30,13 +30,24 @@ registerBlockType(metadata.name, {
 	/**
 	 * @see ./edit.js
 	 */
+	render_callback: render_substar_block,
 	edit: Edit,
-	save: () => null, // Save,
-	// render_callback: render_substar_dynamic_block,
+	save: () => {
+		const blockProps = useBlockProps.save();
+
+		return (
+			<div {...blockProps}>
+				<InnerBlocks.Content />
+			</div>
+		);
+	},
+	// save: () => null, // Save,
 	attributes: metadata.attributes,
-	// render: metadata.render
+	// render_callback: (blockAttributes, innerContent) => {
+	// 	console.log("props");
+	// 	console.log("props", blockAttributes, innerContent);
+	// 	return 'dynamic js';
+	// },
+	render: metadata.render
 });
 
-// render_callback: ( blockAttributes, innerContent ) => {
-// 	return '';
-// },

@@ -17,5 +17,5 @@
  */
 
 /* eslint-disable no-console */
-console.log( 'Hello World! (from create-block-subscribestar-manager block)' );
+// console.log( 'Hello World! (from create-block-subscribestar-manager block)' );
 /* eslint-enable no-console */

@@ -35,7 +35,6 @@ export default function Save() {
 
   return (
     <div { ...blockProps }>
-      save should not be used
       <InnerBlocks.Content />
     </div>
   );
