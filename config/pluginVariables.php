@@ -11,25 +11,6 @@ function substar_manager_register_settings_options()
     register_setting('substar_manager_settings', 'substar_manager_secret');
     register_setting('substar_manager_settings', 'substar_manager_redirect_uri');
     // register_setting('substar_manager_settings', 'substar_manager_request_scope');
-
-    // Tiers (pricing)
-    add_option('substar_manager_tier_1', 200);
-    register_setting('substar_manager_settings', 'substar_manager_tier_1');
-    add_option('substar_manager_tier_2', 500);
-    register_setting('substar_manager_settings', 'substar_manager_tier_2');
-    add_option('substar_manager_tier_3', 1000);
-    register_setting('substar_manager_settings', 'substar_manager_tier_3');
-    add_option('substar_manager_tier_4', 2000);
-    register_setting('substar_manager_settings', 'substar_manager_tier_4');
-    add_option('substar_manager_tier_5', 2500);
-    register_setting('substar_manager_settings', 'substar_manager_tier_5');
-    add_option('substar_manager_tier_6', 4000);
-    register_setting('substar_manager_settings', 'substar_manager_tier_6');
-    add_option('substar_manager_tier_7', 5000);
-    register_setting('substar_manager_settings', 'substar_manager_tier_7');
-    add_option('substar_manager_tier_8', 10000);
-    register_setting('substar_manager_settings', 'substar_manager_tier_8');
-    
 }
 add_action('admin_init', 'substar_manager_register_settings_options');
 
@@ -64,55 +45,6 @@ function substar_manager_settings_page()
                     </td>
                 </tr>
 
-                <tr valign="top">
-                    <th scope="row">Tier 1 Baron</th>
-                    <td><input type="text" name="substar_manager_tier_1"
-                            value="<?php echo esc_attr(get_option('substar_manager_tier_1')); ?>" />
-                    </td>
-                </tr>
-                <tr valign="top">
-                    <th scope="row">Tier 2</th>
-                    <td><input type="text" name="substar_manager_tier_2"
-                            value="<?php echo esc_attr(get_option('substar_manager_tier_2')); ?>" />
-                    </td>
-                </tr>
-                <tr valign="top">
-                    <th scope="row">Tier 3</th>
-                    <td><input type="text" name="substar_manager_tier_3"
-                            value="<?php echo esc_attr(get_option('substar_manager_tier_3')); ?>" />
-                    </td>
-                </tr>
-                <tr valign="top">
-                    <th scope="row">Tier 4</th>
-                    <td><input type="text" name="substar_manager_tier_4"
-                            value="<?php echo esc_attr(get_option('substar_manager_tier_4')); ?>" />
-                    </td>
-                </tr>
-
-                <tr valign="top">
-                    <th scope="row">Tier 5 Royalty</th>
-                    <td><input type="text" name="substar_manager_tier_5"
-                            value="<?php echo esc_attr(get_option('substar_manager_tier_5')); ?>" />
-                    </td>
-                </tr>
-                <tr valign="top">
-                    <th scope="row">Tier 6</th>
-                    <td><input type="text" name="substar_manager_tier_6"
-                            value="<?php echo esc_attr(get_option('substar_manager_tier_6')); ?>" />
-                    </td>
-                </tr>
-                <tr valign="top">
-                    <th scope="row">Tier 7</th>
-                    <td><input type="text" name="substar_manager_tier_7"
-                            value="<?php echo esc_attr(get_option('substar_manager_tier_7')); ?>" />
-                    </td>
-                </tr>
-                <tr valign="top">
-                    <th scope="row">Tier 8</th>
-                    <td><input type="text" name="substar_manager_tier_8"
-                            value="<?php echo esc_attr(get_option('substar_manager_tier_8')); ?>" />
-                    </td>
-                </tr>
             </table>
             <?php submit_button(); ?>
         </form>

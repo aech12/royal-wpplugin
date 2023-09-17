@@ -23,6 +23,7 @@ function check_auth($attributes)
     // Compare user's tier with content's required tier
     $user_tier = requestUserTier($access_token);
     $tier_of_the_content = intval($attributes['tier']);
+
     if ($user_tier >= $tier_of_the_content)
         return 0;
 
@@ -37,17 +38,19 @@ function render_substar_block($attributes, $content)
 
     switch ($render_content) {
         case 0:
-            // return sprintf('<div class="substar-tiers-root">%s</div>', $content);
-            return '<div><p>BEG</p>' . $content . '<p>END</p></div>';
+            return sprintf('<div class="substar-tiers-root">%s</div>', $content);
+            // return '<div><p>BEG</p>' . $content . '<p>END</p></div>';
         case 1:
             return "<p>You're not logged in, or your session expired. Please login.</p>";
         case 2:
             return "<p>No access token, your session must be expired. Please login again.</p>";
         case 3:
-            return "<p>No access to this content.</p>";
+            // return "<p>No access to this content.</p>";
+            return "<p></p>";
         default:
             return "<p>Could not render properly. No case matched.<p>";
     }
 }
+substar-manager
 
 ?>

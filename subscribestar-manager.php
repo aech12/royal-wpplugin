@@ -34,7 +34,7 @@ require_once 'config/log.php';
 
 // Logic for PHP block that is rendered on the server
 require_once 'substar/user.php';
-// require_once 'renderBlock.php';
+require_once 'renderBlock.php';
 
 function create_block_subscribestar_manager_block_init()
 {
