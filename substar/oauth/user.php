@@ -2,7 +2,6 @@
 // Log in using WP native system
 function loginToWp($username, $password)
 {
-  // $user = wp_authenticate($username, $password);
   $user = wp_signon(
     array(
       'user_login' => $username,
@@ -10,18 +9,21 @@ function loginToWp($username, $password)
       'remember' => true
     )
   );
+  _log(wp_get_current_user());
+  _log($user);
 
   if (is_wp_error($user)) {
     // Handle login errors here
     $error_message = $user->get_error_message();
     echo "Login failed: " . $error_message;
+    _log("Failed login");
     return null;
   } else {
     // Login successful, proceed with further actions
-    wp_set_current_user($user->ID);
+    wp_set_auth_cookie($user->ID, true);
+    wp_set_current_user($user->ID, $username);
 
-    $user = wp_get_current_user();
-    return $user;
+    return $user->ID;
   }
 }
 
@@ -53,6 +55,7 @@ function saveUserToWp($substar_user, $tokens)
     update_user_meta($user_id, 'refresh_token', $tokens['refresh_token']);
 
     $user = loginToWp($username, $username);
+    // _log($user);
 
     return $user;
   } else {

@@ -37,11 +37,12 @@
 // }
 
 $final_render = $attributes['tier'];
-$final_render2 = sprintf('<div>%s</div>', $content);
+// $final_render2 = sprintf('<div>%s</div>', $content);
 ?>
 
+<h2>
+	<?= $final_render ?>
+</h2>
 <p <?php echo get_block_wrapper_attributes(); ?>>
-<h2><?= $final_render ?></h2>
-<h2><?= $final_render2 ?></h2>
-	<?php esc_html_e( 'Subscribestar Manager 4 – hello from a dynamic block!', 'subscribestar-manager' ); ?>
+	<?php esc_html_e('Subscribestar Manager 4 – hello from a dynamic block!', 'subscribestar-manager'); ?>
 </p>

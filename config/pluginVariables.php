@@ -63,12 +63,7 @@ function substar_manager_settings_page()
                             value="<?php echo esc_attr(get_option('substar_manager_redirect_uri')); ?>" />
                     </td>
                 </tr>
-                <!-- <tr valign="top">
-                    <th scope="row">SubscribeStar Request Scope</th>
-                    <td><input type="text" name="substar_manager_request_scope"
-                            value="<?php echo esc_attr(get_option('substar_manager_request_scope')); ?>" />
-                    </td>
-                </tr> -->
+
                 <tr valign="top">
                     <th scope="row">Tier 1 Baron</th>
                     <td><input type="text" name="substar_manager_tier_1"

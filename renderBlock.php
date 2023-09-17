@@ -1,6 +1,6 @@
 <?php
 // require_once 'general/log.php';
-require_once 'substar/user.php';
+// require_once 'substar/user.php';
 
 function check_auth($attributes)
 {
@@ -37,8 +37,8 @@ function render_substar_block($attributes, $content)
 
     switch ($render_content) {
         case 0:
-            return sprintf('<div class="substar-tiers-root">%s</div>', $content);
-        // return '<div><p>BEG</p>' . $content . '<p>END</p></div>';
+            // return sprintf('<div class="substar-tiers-root">%s</div>', $content);
+            return '<div><p>BEG</p>' . $content . '<p>END</p></div>';
         case 1:
             return "<p>You're not logged in, or your session expired. Please login.</p>";
         case 2:
@@ -46,7 +46,7 @@ function render_substar_block($attributes, $content)
         case 3:
             return "<p>No access to this content.</p>";
         default:
-            return "Could not render properly. No case matched.";
+            return "<p>Could not render properly. No case matched.<p>";
     }
 }
 

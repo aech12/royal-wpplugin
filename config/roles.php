@@ -8,8 +8,7 @@ $roles = array(
   '5 Royal Plus',
   '6',
   '7',
-  '8',
-  '9'
+  '8'
 );
 
 // Add roles
@@ -29,7 +28,7 @@ foreach ($roles as $index => $role) {
   }
 }
 
-// Add a capability to a role
+// Get role / Add a capability
 // $role = get_role( '5 Royal Plus' );
 // $role->add_cap( 'edit_others_posts', true );
 
