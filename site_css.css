@@ -1,0 +1,71 @@
+/* GENERAL */
+.text-accent-400 {
+	color: #ffcc00;
+}
+
+.entry-meta {
+	display: none;
+}
+/* GENERAL */
+
+/* HEADER */
+/* header buttons */
+@media (max-width: 608px) {
+  .header-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 0px;
+  }
+  
+  .header-button .wp-block-button__link {
+    padding: 10px !important;
+    font-size: smaller !important;
+		font-size: 14px;
+  }
+}
+
+/* header button */
+.header-button a:hover {
+  color: #FACC15 !important;
+  background-color: #171717 !important;
+}
+
+/* image container */
+.site-header-focus-item {
+  padding: 0;
+}
+.header-widget-area {
+  padding: 0;
+}
+
+/* top image spacing */
+.ast-header-break-point #masthead .ast-mobile-header-wrap .ast-primary-header-bar, .ast-header-break-point #masthead .ast-mobile-header-wrap .ast-below-header-bar, .ast-header-break-point #masthead .ast-mobile-header-wrap .ast-above-header-bar {
+	padding-left: 0;
+	padding-right: 0;
+	margin: 0;
+}
+/* HEADER */
+
+/* POSTS */
+.right-img img {
+  object-fit: contain;
+  max-height: 200px;
+}
+/* POSTS */
+/* ROYALTY */
+.royalty-login-button {
+  background-color: #ba0038; /* Blue */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.royalty-login-button:hover {
+  background-color: #8c0009; /* Darker blue */
+}
+/* ROYALTY */

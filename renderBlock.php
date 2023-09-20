@@ -39,11 +39,13 @@ function render_substar_block($attributes, $content)
     switch ($render_content) {
         case 0:
             return sprintf('<div class="substar-tiers-root">%s</div>', $content);
-            // return '<div><p>BEG</p>' . $content . '<p>END</p></div>';
+        // return '<div><p>BEG</p>' . $content . '<p>END</p></div>';
         case 1:
-            return "<p>You're not logged in, or your session expired. Please login.</p>";
+            // return "<p>You're not logged in, or your session expired. Please login.</p>";
+            return "<p></p>";
         case 2:
-            return "<p>No access token, your session must be expired. Please login again.</p>";
+            // return "<p>No access token, your session must be expired. Please login again.</p>";
+            return "<p></p>";
         case 3:
             // return "<p>No access to this content.</p>";
             return "<p></p>";
@@ -51,6 +53,6 @@ function render_substar_block($attributes, $content)
             return "<p>Could not render properly. No case matched.<p>";
     }
 }
-substar-manager
+substar - manager
 
-?>
+    ?>

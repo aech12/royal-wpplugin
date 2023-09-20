@@ -32,7 +32,7 @@ if (strpos($_SERVER['REQUEST_URI'], '/royalty/') === 0 && isset($_GET['code'])) 
       $substar_user = requestUser($tokens['access_token']);
       $user = saveUserToWp($substar_user['data']['user'], $tokens);
       // _log($user);
-      echo '<p>Succesfull! Go back to royaly to access content.</p>';
+      // echo '<p>Succesfull! Go back to royaly to access content.</p>';
     } else {
       _log("Failed to request tokens.");
     }
