@@ -3,7 +3,7 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
  */
-import { __ } from '@wordpress/i18n';
+// import { __ } from '@wordpress/i18n';
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -14,7 +14,7 @@ import { __ } from '@wordpress/i18n';
 import {
 	InnerBlocks,
 	InspectorControls,
-	useBlockProps
+	useBlockProps,
 } from '@wordpress/block-editor';
 
 /**
@@ -37,7 +37,7 @@ import './editor.scss';
 import { PanelBody, SelectControl } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
 
-export default function Edit({ attributes, setAttributes }) {
+export default function Edit( { attributes, setAttributes } ) {
 	const blockProps = useBlockProps();
 	// 	const innerBlocksProps = useInnerBlocksProps()
 	const { tier } = attributes;
@@ -49,8 +49,8 @@ export default function Edit({ attributes, setAttributes }) {
 				<PanelBody title="Tier Settings">
 					<SelectControl
 						label="Tier"
-						value={tier}
-						options={[
+						value={ tier }
+						options={ [
 							{ label: '0 Free', value: 0 },
 							{ label: '1 Baron', value: 1 },
 							{ label: '2', value: 2 },
@@ -60,14 +60,14 @@ export default function Edit({ attributes, setAttributes }) {
 							{ label: '6 Royal+', value: 6 },
 							{ label: '7 Royal+', value: 7 },
 							{ label: '8 Royal+', value: 8 },
-						]}
-						onChange={(value) =>
-							setAttributes({ tier: value })
+						] }
+						onChange={ ( value ) =>
+							setAttributes( { tier: value } )
 						}
 					/>
 				</PanelBody>
 			</InspectorControls>
-			<div {...blockProps}>
+			<div { ...blockProps }>
 				{/* <div {...innerBlocksProps} /> */}
 				<InnerBlocks />
 			</div>

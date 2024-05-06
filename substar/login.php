@@ -1,6 +1,5 @@
 <?php
 // AUTHENTICATE WITH SUBSCRIBERSTAR API
-// require_once 'general/log.php';
 
 // STEP 1
 // Add a shortcode [subscribestar_oauth2_login] to display the SubscribeStar OAuth2 login link/button
@@ -11,11 +10,12 @@ require_once 'oauth/addLoginShortcode.php';
 
 require_once 'requestTokens.php';
 require_once 'user.php';
-require_once 'oauth/user.php';
+// require_once 'oauth/user.php';
+require_once 'oauth/user_session.php';
 
 $current_url = $_SERVER['REQUEST_URI'];
 
-if (strpos($current_url, '/royal/') === 0 && isset($_GET['code'])) {
+if (strpos($current_url, '/royalty/') === 0 && isset($_GET['code'])) {
   // save access token and refresh token to cookies
   $authorization_code = $_GET['code'];
   _log("Code in url:");
@@ -27,7 +27,13 @@ if (strpos($current_url, '/royal/') === 0 && isset($_GET['code'])) {
 
     if ($tokens) {
       $substar_user = requestUser($tokens['access_token']);
-      $user = saveUserToWp($substar_user['data']['user'], $tokens);
+      set_user_access_token($tokens['access_token']);
+      _log("saved token");
+      _log(get_user_access_token());
+      
+
+      // In the old version, saveUserToWp was used to save the user to WP users db
+      // $user = saveUserToWp($substar_user['data']['user'], $tokens);
       // _log($user);
     } else {
       _log("Failed to request tokens.");

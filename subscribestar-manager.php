@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name:       Subscribestar RG Tiers
+ * Plugin Name:       RoyalGames Subscriberstar
  * Description:       Allow user oauth2 login with Subscriberstar.
  * Requires at least: 6.1
  * Requires PHP:      7.0
- * Version:           0.1.0
+ * Version:           1.2.0
  * Author:            Alex Howez
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -21,13 +21,15 @@
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
 
+ declare(strict_types=1);
+
  // Plugin config options, vars, etc
 require_once 'config.php';
 require_once 'config/pluginVariables.php';
 require_once 'config/roles.php';
 require_once 'config/log.php';
  
-// PHP block that is rendered on the server
+// PHP block that is rendered on the server with the content set by the admin
 require_once 'substar/user.php';
 require_once(plugin_dir_path(__FILE__) . 'renderBlock.php');
 

@@ -1,4 +1,7 @@
 <?php
+// define('WP_DEBUG', true);
+// define('WP_DEBUG_LOG', true);
+
 $subscribestar_api_endpoint = "https://www.subscribestar.com/api/graphql/v1";
 $substar_manager_request_scope = "subscriber.read+user.read+user.email.read";
 

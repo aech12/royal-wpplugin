@@ -1,6 +1,7 @@
 <?php
 // require_once 'general/log.php';
 require_once 'substar/user.php';
+require_once 'substar/oauth/user_session.php';
 
 function check_auth($attributes)
 {
@@ -12,19 +13,22 @@ function check_auth($attributes)
         return 0;
 
     // Check if the user is logged in
-    if (!is_user_logged_in())
-        return 1;
+    // if (!is_user_logged_in())
+    //     return 1;
 
     // Check user's access token
-    $access_token = get_user_meta(get_current_user_id(), 'access_token', true);
+    $access_token = get_user_access_token(); // get_user_meta(get_current_user_id(), 'access_token', true);
     if (!$access_token)
-        return 2;
+        return 1;
 
     // Compare user's tier with content's required tier
     $user_tier = requestUserTier($access_token);
     $tier_of_the_content = intval($attributes['tier']);
-    if ($user_tier >= $tier_of_the_content)
+    if ($user_tier >= $tier_of_the_content) {
         return 0;
+    } elseif ($user_tier < $tier_of_the_content) {
+        return 2;
+    }
 
     // If all failed, display no access message
     return 3;
@@ -35,15 +39,19 @@ function render_substar_block($attributes, $content)
 {
     $render_content = check_auth($attributes);
 
+    // case 0 is the only one that displays content
     switch ($render_content) {
         case 0:
+            // case: grant access
             return sprintf('<div class="substar-tiers-root">%s</div>', $content);
-        // return '<div><p>BEG</p>' . $content . '<p>END</p></div>';
         case 1:
-            return "<p>You're not logged in, or your session expired. Please login.</p>";
+            // case: user not logged in
+            return "<div></div>";
         case 2:
-            return "<p>No access token, your session must be expired. Please login again.</p>";
+            // case: user tier is not enough
+            return "<p>Requires higher Subscriberstar tier.</p>";
         case 3:
+            // case: "default" case (no access)
             return "<p>No access to this content.</p>";
         default:
             return "Could not render properly. No case matched.";

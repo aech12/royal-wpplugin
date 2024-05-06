@@ -20,13 +20,13 @@ function requestTokens($code)
   if (!is_wp_error($token_request) && wp_remote_retrieve_response_code($token_request) === 200) {
     $token_response = json_decode(wp_remote_retrieve_body($token_request), true);
 
-    // Redirect the user to the desired page after successful login
-    // wp_redirect(home_url());
-    // exit;
-
     return $token_response;
   } else {
-    echo '<script>console.log(' . json_encode("Failed to request token") . ')</script>';
+    $response_code = wp_remote_retrieve_response_code($token_request);
+    $response_message = wp_remote_retrieve_response_message($token_request);
+    
+    echo '<script>console.log(' . json_encode("Failed to request token: $response_message ($response_code)") . ')</script>';
+    
     return null;
   }
 }

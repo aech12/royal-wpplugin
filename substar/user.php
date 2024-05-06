@@ -30,6 +30,7 @@ function requestUser($access_token)
     }
 }
 
+
 // GET request to get user's subscriber information
 function requestSubscriber($access_token)
 {
@@ -74,6 +75,7 @@ function requestSubscriber($access_token)
         return null;
     }
 }
+
 
 // Returns an int with the user tier
 function requestUserTier($access_token)

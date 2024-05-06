@@ -10,7 +10,7 @@ import Edit from './edit';
 import Save from './save';
 import metadata from './block.json';
 
-registerBlockType(metadata.name, {
+registerBlockType( metadata.name, {
 	/**
 	 * @see ./edit.js
 	 */
@@ -19,5 +19,5 @@ registerBlockType(metadata.name, {
 	edit: Edit,
 	save: Save,
 	attributes: metadata.attributes,
-});
+} );
 
