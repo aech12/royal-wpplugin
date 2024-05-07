@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 
 // Save the user access token for the session
 function set_user_access_token($access_token)
