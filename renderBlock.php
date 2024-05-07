@@ -49,7 +49,7 @@ function render_substar_block($attributes, $content)
             return "<div></div>";
         case 2:
             // case: user tier is not enough
-            return "<p>Requires higher Subscriberstar tier.</p>";
+            return "<p>This content requires a higher Subscriberstar tier.</p>";
         case 3:
             // case: "default" case (no access)
             return "<p>No access to this content.</p>";
