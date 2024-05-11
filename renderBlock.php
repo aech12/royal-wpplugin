@@ -12,12 +12,8 @@ function check_auth($attributes)
     if (isset($user_roles) && !empty($user_roles) && $user_roles[0] === 'administrator')
         return 0;
 
-    // Check if the user is logged in
-    // if (!is_user_logged_in())
-    //     return 1;
-
     // Check user's access token
-    $access_token = get_user_access_token(); // get_user_meta(get_current_user_id(), 'access_token', true);
+    $access_token = get_user_access_token();
     if (!$access_token)
         return 1;
 
@@ -35,9 +31,9 @@ function check_auth($attributes)
 }
 
 // Render the block if the user has the correct tier
-function render_substar_block($attributes, $content)
+function render_substar_block($block_attributes, $content)
 {
-    $render_content = check_auth($attributes);
+    $render_content = check_auth($block_attributes);
 
     // case 0 is the only one that displays content
     switch ($render_content) {
